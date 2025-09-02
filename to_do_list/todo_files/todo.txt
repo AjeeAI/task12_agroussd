@@ -1,0 +1,4 @@
+Write some text in here
+Share
+& C:/Users/DELL/AppData/Local/Programs/Python/Python313/python.exe c:/Users/DELL/Desktop/to_do_list/main.py
+Push to github

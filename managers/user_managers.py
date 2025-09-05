@@ -8,14 +8,13 @@ Welcome to the Agro-Ussd system
 1. Register as Buyer
 2. Register as Farmer
 0. Back
-00. Exit
     """
     print(option1)
     while True:
         choice = int(input("Choose from the available options to continue: "))
-        if choice == 00:
-            print("Ussd is exiting!!!")
+        if choice == 0:
             break
+            
         elif choice == 1:
             print("-------------- Buyer Registration -------------")
             buyer = Buyer()
@@ -27,3 +26,9 @@ Welcome to the Agro-Ussd system
             farmer = Farmer()
             farmer.register()
             farmer.save_farmer()
+        else:
+            print("Invalid input. Please choose from the available options to continue!")
+            
+            
+# def login():
+    

@@ -19,7 +19,6 @@
 # farmer1 = Farmers("Ajani", 35, "Ogun state", "Abeokuta South", "08059081256", 30, "Rice", "Beans", "Yam")
 # farmer1.display_details()
 
-
 from pathlib import Path
 import csv
 import random

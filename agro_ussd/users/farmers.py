@@ -26,7 +26,7 @@ import random
 
 
 #i want to save userid and password in data base probably a csvfile
-workspace = Path("task12_agroussd/agro_ussd/data")
+workspace = Path("agro_ussd/data")
 workspace.mkdir(exist_ok=True)
 csv_file = Path.cwd()/workspace/"users.csv"
 def save_user(path,login_credential):

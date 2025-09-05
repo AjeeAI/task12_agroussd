@@ -9,14 +9,15 @@ class Buyer(User):
     
     def save_buyer(self):
         file_exists = path.exists()
-        with open(path, "a", encoding="utf-8") as file:
-            fieldnames = ["name", "contact_info", "state", "lga"]
+        with open(path, "a", encoding="utf-8", newline="") as file:
+            fieldnames = ["name", "password", "contact_info", "state", "lga"]
             writer = csv.DictWriter(file, fieldnames = fieldnames)
             if not file_exists:
                 writer.writeheader()
                 
             writer.writerow({
                 "name": self.name,
+                "password": self.password,
                     "contact_info": self.phone,
                     "state": self.state,
                     "lga": self.lga

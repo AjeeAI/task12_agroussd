@@ -2,6 +2,14 @@ from agro_ussd.users.user import User
 from agro_ussd.users.farmers import Farmer
 from agro_ussd.users.buyers import Buyer
 from managers.user_managers import register
+from managers.authentication import UserAuthentication
+from pathlib import Path
+
+folder = Path("agro_ussd/data")
+
+buyer_csv = folder / "buyers.csv"
+farmer_csv = folder / "farmers.csv"
+path = folder / "buyers.csv"
 
 def main():
     while True:
@@ -16,7 +24,24 @@ def main():
         if choice == 0:
             break
         elif choice == 1:
-            pass
+            user_type = input("Are you a buyer or a farmer(b for buyer/ f for farmer): ").strip().upper()
+            if user_type != "B" and user_type != "F":
+                print("Invalid input! Input can only be B or F")
+            elif user_type == "B":
+                csv_path = buyer_csv
+            else:
+                csv_path = farmer_csv
+        
+            auth = UserAuthentication(csv_path)
+            user_data = auth.login()
+            if user_type == "B":
+                buyer = Buyer(*user_data)
+                print(f"Welcome buyer {buyer.name}")
+            else:
+                farmer = Farmer(*user_data)
+                print(f"Welcome buyer {farmer.name}")
+                
+           
         elif choice == 2:
             option1 = """
     Welcome to the Agro-Ussd system

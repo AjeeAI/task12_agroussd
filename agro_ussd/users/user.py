@@ -6,8 +6,9 @@ path = folder / "users.csv"
 
 user_dict = {}
 class User:
-    def __init__(self, name= "", phone = "", state= "", lga = ""):
+    def __init__(self, name= "", password = "",phone = "", state= "", lga = ""):
         self.name = name
+        self.password = password
         self.phone = phone
         self.state = state
         self.lga = lga
@@ -15,13 +16,14 @@ class User:
     def save_user(self):
         file_exists = path.exists()
         with open(path, "a", encoding="utf-8", newline = "") as file:
-            fieldnames = ["name", "contact_info", "state", "lga"]
+            fieldnames = ["name", "password","contact_info", "state", "lga"]
             writer = csv.DictWriter(file, fieldnames = fieldnames)
             if not file_exists:
                 writer.writeheader()
                 
             writer.writerow({
                 "name": self.name,
+                "password": self.password,
                     "contact_info": self.phone,
                     "state": self.state,
                     "lga": self.lga
@@ -37,7 +39,12 @@ class User:
             else:
                 print("This field cannot be left empty!!!")
                 continue
-                
+            password = input("Enter your password: ").strip()
+            if password != "":
+                self.password = password
+            else:
+                print("This field cannot be left empty!!!")
+                continue
             phone = input("Enter your phone number: ").strip()
             if phone != "":
                 self.phone = phone

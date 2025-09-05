@@ -88,7 +88,7 @@
 #         print(user_details)
 
 
-from user import User
+from .user import User
 
 from pathlib import Path
 import csv
@@ -142,8 +142,8 @@ class Farmer(User):
                 "products": self.products
                 }
             )
-      
-farmer1 = Farmer()
+if __name__ == "__main__":
+    farmer1 = Farmer()
 
-farmer1.register()
-farmer1.save_farmer()
+    farmer1.register()
+    farmer1.save_farmer()

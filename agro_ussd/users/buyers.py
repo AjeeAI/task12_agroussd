@@ -1,4 +1,4 @@
-from user import User
+from .user import User
 from pathlib import Path
 import csv
 
@@ -21,7 +21,9 @@ class Buyer(User):
                     "state": self.state,
                     "lga": self.lga
                     })
-buyer1 = Buyer()
-buyer1.register()
-buyer1.save_buyer()
+            
+# if __name__ == "__main__":            
+    # buyer1 = Buyer()
+    # buyer1.register()
+    # buyer1.save_buyer()
         

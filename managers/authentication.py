@@ -54,6 +54,7 @@ class UserAuthentication:
 
 if __name__ == "__main__":
     
-    authenication = UserAuthentication(buyer_csv)
+    
+    authenication = UserAuthentication()
 
     authenication.login()

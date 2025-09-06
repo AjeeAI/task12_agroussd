@@ -9,8 +9,8 @@ path = folder / "farmers.csv"
 user_dict = {}
 
 class Farmer(User):
-    def __init__(self, name= "", phone = "", state= "", lga = "", farm_size = 0, products = None):
-        super().__init__(name, phone,  state, lga)
+    def __init__(self, name= "", password  = "", phone = "", state= "", lga = "", farm_size = 0, products = None):
+        super().__init__(name, password, phone,  state, lga)
         self.farm_size = farm_size
         self.products = products if products is not None else []
     
@@ -38,13 +38,14 @@ class Farmer(User):
     def save_farmer(self):
         file_exists = path.exists()
         with open(path, "a", encoding= "utf-8", newline="") as file:
-            fieldnames = ["name", "contact_info", "state", "lga", "farm_size", "products"]
+            fieldnames = ["name", "password", "contact_info", "state", "lga", "farm_size", "products"]
             writer = csv.DictWriter(file, fieldnames=fieldnames)
             if not file_exists:
                 writer.writeheader()
             
             writer.writerow({
                 "name": self.name,
+                "password": self.password,
                 "contact_info": self.phone,
                 "state": self.state,
                 "lga": self.lga,
@@ -52,6 +53,13 @@ class Farmer(User):
                 "products": self.products
                 }
             )
+    def edit_farmer_details(self):
+        while True:
+            with open(path, "r+", encoding="utf-8")as file:
+                reader = csv.reader(file)
+                for num, row in enumerate(reader):
+                    print(f"{num}. {row}")
+                    break
 if __name__ == "__main__":
     farmer1 = Farmer()
 

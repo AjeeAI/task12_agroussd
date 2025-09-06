@@ -22,7 +22,14 @@ class Buyer(User):
                     "state": self.state,
                     "lga": self.lga
                     })
-            
+    def edit_buyer_details(self):
+        while True:
+            with open(path, "r+", encoding="utf-8")as file:
+                reader = csv.reader(file)
+                for num, row in enumerate(reader):
+                    
+                    print(f"{num}. {row}")
+                break
 # if __name__ == "__main__":            
     # buyer1 = Buyer()
     # buyer1.register()

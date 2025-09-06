@@ -3,6 +3,7 @@ from agro_ussd.users.farmers import Farmer
 from agro_ussd.users.buyers import Buyer
 from managers.user_managers import register
 from managers.authentication import UserAuthentication
+from managers.editor import Editor
 from pathlib import Path
 import csv
 
@@ -38,17 +39,14 @@ def main():
             if user_type == "B":
                 buyer = Buyer(*user_data)
                 print(f"Welcome buyer {buyer.name}")
-                def edit():
-                    with open(csv_path, "r+", encoding="utf-8") as file:
-                        reader = file.readlines()
-                        for num, row in enumerate(reader):
-                            if row == user_data:
-                                print(f"{num}. {row}")
-                edit()
+                view = Editor(csv_path)
+                print(view.view(buyer.name))
+                
             else:
                 farmer = Farmer(*user_data)
                 print(f"Welcome farmer {farmer.name}")
-                farmer.edit_farmer_details()
+                view = Editor(csv_path)
+                print(view.view(farmer.name))
            
         elif choice == 2:
             option1 = """

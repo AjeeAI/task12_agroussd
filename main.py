@@ -6,7 +6,7 @@ from managers.authentication import UserAuthentication
 from managers.editor import Editor
 from pathlib import Path
 import csv
-
+import readline
 folder = Path("agro_ussd/data")
 
 buyer_csv = folder / "buyers.csv"
@@ -37,16 +37,21 @@ def main():
             auth = UserAuthentication(csv_path)
             user_data = auth.login()
             if user_type == "B":
-                buyer = Buyer(*user_data)
-                print(f"Welcome buyer {buyer.name}")
+                try:
+                    buyer = Buyer(*user_data)
+                    print(f"Welcome buyer {buyer.name}")
+                except Exception as e:
+                    print(e)
                 view = Editor(csv_path)
                 print(view.view(buyer.name))
+                view.edit(buyer.name)
                 
             else:
                 farmer = Farmer(*user_data)
                 print(f"Welcome farmer {farmer.name}")
                 view = Editor(csv_path)
-                print(view.view(farmer.name))
+                # print(view.view(farmer.name))
+                print(view.edit(farmer.name))
            
         elif choice == 2:
             option1 = """

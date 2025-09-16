@@ -21,35 +21,44 @@ class UserAuthentication:
 
     def login(self):
         while True:
-            username = input("Enter your username: ").strip()
-            password = input("Enter your password: ").strip()
-            found = False
-            password_correct = False
-            user_row = None
-            with open(self.path, "r", encoding= "utf-8") as f:
-                reader = csv.reader(f)
-                next(reader)
-                for row in reader:
-                    if not row:
-                        continue
-                    if row[0].strip() == username:
-                        found = True
-                        user_row = row
-                        if row[1].strip() == password:
-                            password_correct = True
-                            return user_row
+            try:
+                username = input("Enter your username: ").strip()
+                password = input("Enter your password: ").strip()
+                found = False
+                password_correct = False
+                user_row = None
+                try:
+                    with open(self.path, "r", encoding= "utf-8") as f:
+                        reader = csv.reader(f)
+                        try:
+                            next(reader)
+                        except StopIteration:
+                            print("No users found yet!!!")
+                            return None
+                        for row in reader:
+                            if not row:
+                                continue
+                            if row[0].strip() == username:
+                                found = True
+                                user_row = row
+                                if row[1].strip() == password:
+                                    password_correct = True
+                                    return user_row
+                                
+                                break
+                    
+                    if not found:
+                        print("Username not found! You are not registered!")
+                    elif not password_correct:
+                        print("Password entered is not correct!")
+                    else:
+                        print(f"Login successful! Welcome {user_row[0]}")
+                        return user_row
                         
-                        break
-            
-            if not found:
-                print("Username not found! You are not registered!")
-            elif not password_correct:
-                print("Password entered is not correct!")
-            else:
-                print(f"Login successful! Welcome {user_row[0]}")
-                return user_row
-                
-                   
+                except FileNotFoundError:
+                    print("The file doesn't exist. Try creating it first!!!")
+            except Exception as e:
+                print(e)
                         
 
 if __name__ == "__main__":

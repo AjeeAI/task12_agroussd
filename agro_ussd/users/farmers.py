@@ -53,13 +53,13 @@ class Farmer(User):
                 "products": self.products
                 }
             )
-    def edit_farmer_details(self):
-        while True:
-            with open(path, "r+", encoding="utf-8")as file:
-                reader = csv.reader(file)
-                for num, row in enumerate(reader):
-                    print(f"{num}. {row}")
-                    break
+    # def edit_farmer_details(self):
+    #     while True:
+    #         with open(path, "r+", encoding="utf-8")as file:
+    #             reader = csv.reader(file)
+    #             for num, row in enumerate(reader):
+    #                 print(f"{num}. {row}")
+    #                 break
 if __name__ == "__main__":
     farmer1 = Farmer()
 
